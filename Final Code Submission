@@ -1,1 +1,13 @@
-#CREATE SCHEMA `Gradebook` ;
+#CREATE SCHEMA FOR THE DATABASE
+
+CREATE SCHEMA `Gradebook` ;
+
+#CREATE TABLE FOR THE STUDENT
+
+CREATE TABLE `Gradebook`.`STUDENT` (
+    `FirstName` varchar(255) DEFAULT NULL,
+    `LastName` varchar(255) DEFAULT NULL,
+    `Major` varchar(255) DEFAULT NULL,
+    `StudentID` int UNSIGNED NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (`StudentID`)
+);
