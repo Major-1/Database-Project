@@ -1,9 +1,9 @@
-#create schema for the database:
+#CREATE SCHEMA FOR THE DATABASE:
 
 CREATE SCHEMA `Gradebook` ;
 
 
-#create tables needed for the database 
+#CREATE TABLES NEEDED FOR THE DATABASE:
 
 CREATE TABLE `Gradebook`.`STUDENT` (
     `FirstName` varchar(255) DEFAULT NULL,
