@@ -1,8 +1,9 @@
-#CREATE SCHEMA FOR THE DATABASE
+#create schema for the database:
 
 CREATE SCHEMA `Gradebook` ;
 
-#CREATE TABLE FOR THE STUDENT
+
+#create tables needed for the database 
 
 CREATE TABLE `Gradebook`.`STUDENT` (
     `FirstName` varchar(255) DEFAULT NULL,
@@ -11,3 +12,4 @@ CREATE TABLE `Gradebook`.`STUDENT` (
     `StudentID` int UNSIGNED NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`StudentID`)
 );
+
