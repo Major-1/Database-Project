@@ -17,7 +17,9 @@
 
 
 ## 2. Instructions to complile
-
+1. Code was run using MySQL Workbench
+2. local instance can be made to run schema locally
+3. 
 
 ## 3. ER Diagram
 
