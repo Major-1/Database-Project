@@ -1,6 +1,6 @@
 # Database-Project
 
-## 2. Tasks
+## 1. Tasks
 
 1. Design the ER diagram;
 2. Write the commands for creating tables and inserting values;
