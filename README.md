@@ -15,4 +15,10 @@
 11. Compute the grade for a student;
 12. Compute the grade for a student, where the lowest score for a given category is dropped.
 
+
+## 2. Instructions to complile
+
+
+## 3. ER Diagram
+
 ![Image](IMG_4618.jpeg)
