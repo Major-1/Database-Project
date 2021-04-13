@@ -1,5 +1,13 @@
 CREATE SCHEMA Gradebook;
 
+DROP TABLE IF EXISTS `GRADEBOOK`;
+CREATE TABLE `GRADEBOOK` (
+    `StudentID` int(11) NOT NULL,
+    `AssignmentID` int(11) NOT NULL,
+    `Point` int(11) DEFAULT 0 NOT NULL,
+    PRIMARY KEY (`StudentID`, `AssignmentID`)
+);
+ 
  CREATE TABLE `Gradebook`.`STUDENT` (
     `FirstName` varchar(255) DEFAULT NULL,
     `LastName` varchar(255) DEFAULT NULL,
@@ -273,7 +281,6 @@ INSERT INTO `SCORE` VALUES(02551, 16, 87);
 INSERT INTO `SCORE` VALUES(02548, 17, 77);
 INSERT INTO `SCORE` VALUES(02367, 17, 67);
 
-
 #TASK 3: Show the tables with the contents that you have inserted
 SELECT * FROM STUDENT;
 SELECT * FROM ENROLLMENT;
@@ -291,6 +298,44 @@ select a.AssignmentID, avg(s.POINTS), max(s.POINTS), min(s.POINTS) from ASSIGNME
 select s.StudentID, s.FirstName from STUDENT s JOIN ENROLLMENT e where e.CourseID = 89784 and s.StudentID = e.StudentID;
 
 
+#TASK 6: List all of the students in a course and all of their scores on every assignment
+SELECT s.StudentID, s.FirstName, s.LastName, e.CourseID, g.AssignmentID, g.Points
+FROM STUDENT s, ENROLLMENT e, GRADEBOOK g
+WHERE s.StudentID = g.StudentId AND g.StudentID = e.StudentID AND e.CourseID = 5;
+
+
 #TASK 7: Add an assignment to a course;
 SELECT * FROM ASSIGNMENT; 
-INSERT INTO ASSIGNMENT VALUES (41, 5, 2, 80);
+INSERT INTO ASSIGNMENT VALUES (42, 5, 2, 100);
+
+
+#TASK 8: Change the percentages of the categories for a course;
+UPDATE DISTRIBUTION SET percentage = 45 WHERE CategoryName = 'Final';
+
+
+#TASK 9: Add 2 points to the score of each student on an assignment;
+UPDATE ASSIGNMENT SET POINTS = POINTS + 2 WHERE AssignmentID = 9; 
+
+
+#TASK 10: Add 2 points just to those students whose last name contains a ‘Q’.
+UPDATE GRADEBOOK SET Point = Point + 2
+WHERE GRADEBOOK.StudentID = (SELECT StudentID FROM STUDENT WHERE GRADEBOOK.StudentID = 
+                             STUDENT.StudentID AND STUDENT.LastName LIKE '%Q%');
+
+#TASK 11: Compute the grade for a student;
+SELECT DISTINCT pt.StudentID, st.FirstName, st.LastName, pt.CourseID,pt.AssignmentID, pt.CategoryName, pt.Points
+FROM (
+     SELECT STUDENT.StudentID, AssignmentID, FirstName, LastName, CourseID, Points
+     FROM STUDENT JOIN ENROLLMENT JOIN GRADEBOOK
+     WHERE STUDENT.StudentID = ENROLLMENT.StudentID
+     AND STUDENT.StudentID = SCORE.StudentID) st
+JOIN
+ (SELECT StudentID, CourseID, CategoryName, ASSIGNMENT.AssignmentID, Points
+     FROM DISTRIBUTION JOIN ASSIGNMENT JOIN GRADEBOOK
+     WHERE DISTRIBUTION.DistributionID = ASSIGNMENT.DistributionID
+     AND ASSIGNMENT.AssignmentID = SCORE.AssignmentID) pt
+WHERE st.AssignmentID = pt.AssignmentID
+AND st.Points = pt.Points AND st.StudentID=89784;
+
+#TASK 12: Compute the grade for a student, where the lowest score for a given category is dropped.
+
