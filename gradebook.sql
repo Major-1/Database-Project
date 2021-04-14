@@ -1,4 +1,4 @@
-CREATE SCHEMA GradeBook;
+#CREATE SCHEMA GradeBook;
 
 CREATE TABLE `STUDENT` (
     `FirstName` varchar(255) DEFAULT NULL,
@@ -144,10 +144,10 @@ VALUES
 (20, 5, 2, 80);
 
 #TASK 8: Change the percentages of the categories for a course;
-UPDATE DISTRIBUTION SET Percent = 30 WHERE CATEGORY = 'PARTICIPATION';
+UPDATE DISTRIBUTION SET Percentage = 45 WHERE CategoryName = 'TEST';
 
 #TASK 9: Add 2 points to the score of each student on an assignment;
-UPDATE GRADEBOOK SET Point = Point + 2 WHERE AssignmentID = 6; 
+UPDATE GRADEBOOK SET Point = Point + 2 WHERE AssignmentID = 9; 
 
 #TASK 10: Add 2 points just to those students whose last name contains a ‘Q’.
 UPDATE GRADEBOOK
